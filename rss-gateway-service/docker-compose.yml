@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   discovery:
     image: discovery-service
@@ -14,6 +14,24 @@ services:
       - 10003:10003
   account-service:
     image: account-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:10002/eureka
+    depends_on:
+      - discovery
+  evaluation-service:
+    image: evaluation-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:10002/eureka
+    depends_on:
+      - discovery
+  cart-service:
+    image: cart-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:10002/eureka
+    depends_on:
+      - discovery
+  inventory-service:
+    image: inventory-service
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:10002/eureka
     depends_on:
